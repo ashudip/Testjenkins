@@ -35,8 +35,8 @@ public class TestNGclass {
 		String path = System.getProperty("user.dir");
 		System.out.println(path);
         xl_path = path+"/src/main/resources/Testcase.xlsx";
-        xl_tcRes = "/home/codemaxpc-01/eclipse-workspace/basics/src/main/resources/TCres_reg.xlsx";
-        xl_TsRes = "/home/codemaxpc-01/eclipse-workspace/basics/src/main/resources/TSres_reg.xlsx";
+        xl_tcRes = path+"/src/main/resources/TCres_reg.xlsx";
+        xl_TsRes = path"/src/main/resources/TSres_reg.xlsx";
         xlTC = ReadExcel.readXL(xl_path,"Test cases");
         xlTS = ReadExcel.readXL(xl_path,"Test Steps");
     xRows_TC = xlTC.length;
