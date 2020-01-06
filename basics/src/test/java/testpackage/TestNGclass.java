@@ -36,6 +36,7 @@ public class TestNGclass {
 		System.out.println(path);
         xl_path = path+"/src/main/resources/Testcase.xlsx";
         xl_tcRes = path+"/src/main/resources/TCres_reg.xlsx";
+        System.out.println("path of test case result="+xl_tcRes);
         xl_TsRes = path+"/src/main/resources/TSres_reg.xlsx";
         xlTC = ReadExcel.readXL(xl_path,"Test cases");
         xlTS = ReadExcel.readXL(xl_path,"Test Steps");
