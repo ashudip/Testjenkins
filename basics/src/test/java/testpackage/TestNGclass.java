@@ -32,7 +32,9 @@ public class TestNGclass {
 	@BeforeTest
     public void init() throws Exception
     {
-        xl_path = "/home/codemaxpc-01/eclipse-workspace/basics/src/main/resources/Testcase.xlsx";
+		String path = System.getProperty("user.dir");
+		System.out.println(path);
+        xl_path = path+"src/main/resources/Testcase.xlsx";
         xl_tcRes = "/home/codemaxpc-01/eclipse-workspace/basics/src/main/resources/TCres_reg.xlsx";
         xl_TsRes = "/home/codemaxpc-01/eclipse-workspace/basics/src/main/resources/TSres_reg.xlsx";
         xlTC = ReadExcel.readXL(xl_path,"Test cases");
