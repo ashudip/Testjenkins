@@ -33,7 +33,8 @@ public class TestNGclass {
     public void init() throws Exception
     {
 		String path = System.getProperty("user.dir");
-		System.out.println(path);
+		
+		System.out.println("path of the system="+path);
         xl_path = path+"/src/main/resources/Testcase.xlsx";
         xl_tcRes = path+"/src/main/resources/TCres_reg.xlsx";
         System.out.println("path of test case result="+xl_tcRes);
