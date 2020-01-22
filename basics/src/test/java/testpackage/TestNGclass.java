@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -169,8 +170,10 @@ public class TestNGclass {
     	driver = new FirefoxDriver(firefoxoption);
 	    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 	    driver.manage().window().maximize();*/
-    	DesiredCapabilities dc = new DesiredCapabilities().chrome();
-    	URL url = new URL("http://localhost:4444/wd/hub");
+    	ChromeOptions options = new ChromeOptions();
+    	DesiredCapabilities dc = DesiredCapabilities.chrome();
+    	dc.setCapability(ChromeOptions.CAPABILITY, options);
+    	URL url = new URL("http://192.168.17.105:4444/wd/hub");
         driver = new RemoteWebDriver(url,dc);
     	
     }
