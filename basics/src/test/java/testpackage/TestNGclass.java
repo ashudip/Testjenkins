@@ -3,14 +3,19 @@ package testpackage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
@@ -21,7 +26,7 @@ import POMpackage.Login_identifiers;
 
 public class TestNGclass {
 	
-	WebDriver driver;
+	RemoteWebDriver driver;
     String xl_path,xl_tcRes,xl_TsRes;
     int xRows_TC, xRows_TS, xCols_TC, xCols_TS,randno;
     String[][] xlTC, xlTS;
@@ -85,7 +90,7 @@ public class TestNGclass {
                                 vTS_Res = "verfication failed";
                                 vTC_Res = "fail";
                                xlTS[j][9] = "look at the screenshot";
-                               takeScreenshot("/home/codemaxpc-01/Desktop/BTA/FailScreenshot/fail"+xlTC[i][0]+"_"+j+".png");
+                              takeScreenshot("/home/codemaxpc-01/Desktop/BTA/FailScreenshot/fail"+xlTC[i][0]+"_"+j+".png");
                                     
                             }
                         } catch (Exception e) {
@@ -117,7 +122,7 @@ public class TestNGclass {
         //driver.quit();        
     }
 	
-    public String execute(String KW,String IP1,String IP2,String expected) throws InterruptedException {
+    public String execute(String KW,String IP1,String IP2,String expected) throws InterruptedException, MalformedURLException {
     	if(KW.equalsIgnoreCase("LaunchBrowser"))
         {
             LaunchBrowser();
@@ -154,12 +159,20 @@ public class TestNGclass {
     	}
     }
     
-    public void LaunchBrowser()
+    public void LaunchBrowser() throws MalformedURLException
     {
-    	System.setProperty("webdriver.gecko.driver","/home/codemaxpc-01/Desktop/BTA/geckodriver");	   
-    	driver = new FirefoxDriver();
+    	/*System.setProperty("webdriver.gecko.driver","/home/codemaxpc-01/Desktop/BTA/geckodriver");	
+    	FirefoxBinary firefoxbinary = new FirefoxBinary();
+    	firefoxbinary.addCommandLineOptions("-headless");
+    	FirefoxOptions firefoxoption = new FirefoxOptions();
+    	firefoxoption.setBinary(firefoxbinary);
+    	driver = new FirefoxDriver(firefoxoption);
 	    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-	    driver.manage().window().maximize();
+	    driver.manage().window().maximize();*/
+    	DesiredCapabilities dc = new DesiredCapabilities().chrome();
+    	URL url = new URL("http://localhost:4444/wd/hub");
+        driver = new RemoteWebDriver(url,dc);
+    	
     }
     public void enter_url(String ip1)
     {
@@ -201,7 +214,7 @@ public class TestNGclass {
   
  public void takeScreenshot(String path) throws IOException
  {
-	 File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	    File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 FileUtils.copyFile(src, new File(path));
  }
 
